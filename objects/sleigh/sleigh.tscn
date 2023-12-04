@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://11he7uxdc3fr"]
+
+[ext_resource type="Texture2D" uid="uid://dgsct8dv7p3y5" path="res://assets/Misc/Sleigh.png" id="1_61r4q"]
+[ext_resource type="Script" path="res://objects/sleigh/sleigh.gd" id="1_j1ekb"]
+[ext_resource type="AudioStream" uid="uid://c83qymn34wvd1" path="res://assets/sounds/pick.wav" id="3_lnwwr"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ygai2"]
+height = 150.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_grxwu"]
+radius = 4.0
+height = 42.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_okeh3"]
+height = 146.0
+
+[node name="Sleigh" type="CharacterBody2D"]
+script = ExtResource("1_j1ekb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_61r4q")
+region_enabled = true
+region_rect = Rect2(0, 22, 284, 188)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 34)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ygai2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-65, 7)
+shape = SubResource("CapsuleShape2D_grxwu")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(68, 8)
+shape = SubResource("CapsuleShape2D_grxwu")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-2, 30)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_okeh3")
+
+[node name="Pick" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_lnwwr")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

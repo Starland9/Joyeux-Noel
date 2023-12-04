@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvs3ks4w4agj4"]
+
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_unh4k"]
+[ext_resource type="PackedScene" uid="uid://c508sxc4hy0oo" path="res://objects/present_sponer/present_sponer.tscn" id="1_xjlhi"]
+[ext_resource type="PackedScene" uid="uid://11he7uxdc3fr" path="res://objects/sleigh/sleigh.tscn" id="3_vg1d6"]
+[ext_resource type="AudioStream" uid="uid://dbyi7l1w57hku" path="res://assets/sounds/chains_of_discord.mp3" id="4_b5cdb"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_unh4k")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 364.0
+offset_bottom = 707.0
+color = Color(0.0705882, 0.262745, 0.282353, 1)
+
+[node name="PresentSponer" parent="." instance=ExtResource("1_xjlhi")]
+
+[node name="Sleigh" parent="." instance=ExtResource("3_vg1d6")]
+position = Vector2(164, 649)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 68.0
+offset_bottom = 30.0
+text = "Score: 0"
+
+[node name="BgMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_b5cdb")
+volume_db = -1.02
+autoplay = true
+
+[connection signal="score_updated" from="Sleigh" to="." method="_on_sleigh_score_updated"]
